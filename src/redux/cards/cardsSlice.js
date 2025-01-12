@@ -65,16 +65,50 @@ const initialState = {
       url: "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/detail/077.png",
     },
   ],
+  compareItems: [],
+  compareOpenItems: [],
+  compareResult: false,
+  clickCount: 0,
+  isLocked: false,
+  point: 0,
 };
 
 const cardsSlice = createSlice({
   name: "cards",
   initialState,
-  reducers: {},
+  reducers: {
+    compare(state, action) {
+      const cardId = action.payload;
+      if (state.compareItems.length < 2) {
+        state.compareItems.push(cardId);
+        if (state.compareItems.length === 2) {
+          state.isLocked = true;
+          if (state.compareItems[0] === state.compareItems[1]) {
+            state.compareResult = true;
+            state.point += 50;
+            state.compareOpenItems.push(...state.compareItems);
+          } else {
+            state.compareResult = false;
+            state.point -= 10;
+          }
+        }
+      }
+    },
+    unlock(state) {
+      state.isLocked = false;
+      state.compareItems = [];
+    },
+  },
 });
 
-// export const {} = cardsSlice.actions;
+export const { compare, unlock } = cardsSlice.actions;
 
 export const cardsSelector = (state) => state.cards.value;
+export const compareItemsSelector = (state) => state.cards.compareItems;
+export const compareOpenItemsSelector = (state) => state.cards.compareOpenItems;
+export const compareResultSelector = (state) => state.cards.compareResult;
+export const clickCount = (state) => state.cards.clickCount;
+export const isLockedSelector = (state) => state.cards.isLocked;
+export const pointSelector = (state) => state.cards.point;
 
 export default cardsSlice.reducer;

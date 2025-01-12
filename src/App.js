@@ -2,6 +2,9 @@ import { useSelector } from "react-redux";
 import "./App.css";
 import Card from "./components/Card";
 import { cardsSelector } from "./redux/cards/cardsSlice";
+import { useEffect } from "react";
+import React from "react";
+import PointDisplay from "./components/Point/point";
 
 function shuffleArray(array) {
   const newArray = [...array];
@@ -14,22 +17,24 @@ function shuffleArray(array) {
 
 function App() {
   const cards = useSelector(cardsSelector);
-
   const displayCards = shuffleArray([...cards, ...cards]);
+
+  const handleTryAgain = () => {
+    window.location.reload();
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <div className="container">
       <div className="content">
         <div className="content-top">
-          <div className="content-top-left">
-            <span>Point:</span>
-            <span>0</span>
-          </div>
-          <button>Try Again</button>
+          <PointDisplay />
+          <button onClick={handleTryAgain}>Try Again</button>
         </div>
         <div className="content-middle ">
           {displayCards.map((card) => (
-            <Card card={card} />
+            <Card key={card.id} card={card} />
           ))}
         </div>
         <div className="content-footer">

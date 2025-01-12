@@ -55,10 +55,32 @@ body {
   border-radius: 20px;
 }
 
+@keyframes spin {
+  from {
+    transform: rotateY(0deg);
+  }
+  50% {
+    transform: rotateY(180deg);
+  }
+  to {
+    transform: rotateY(0deg);
+  }
+}
+
+.card.rotate {
+  animation: spin 2s linear;
+  background: white;
+  pointer-events: none;
+}
+
+.card-open {
+  background: white !important;
+  pointer-events: none;
+}
+
 .card {
   width: 100px;
   height: 100px;
-
   display: flex;
   justify-content: center;
   align-items: center;
@@ -66,6 +88,9 @@ body {
   border: 1px solid #6a11cb88;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   cursor: pointer;
+  background: url("./assets/images/pokemon.webp");
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .card-close {
