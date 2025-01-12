@@ -1,9 +1,11 @@
 # memory-card-game
 
-HTML - CSS - JS - React -Redux Project
+HTML - CSS - JS - React - Redux App
 
 ---
 
-[See The Project]()
+[See The Project](https://memorycardgame01.surge.sh/)
 
-![mcgimg]()
+![mcgimg](mcgimg.webp)
+
+[Patika](https://academy.patika.dev/tr/@alpk)
